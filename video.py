@@ -4,7 +4,9 @@ from streamlit_webrtc import webrtc_streamer, WebRtcMode
 import mediapipe as mp
 from gestures.init import *
 from gestures.gestures import *
+from gtts import gTTS
 import pyttsx3 as ps
+# from 
 
 mp_holistic = mp.solutions.holistic
 holistic = mp_holistic.Holistic()
@@ -95,5 +97,14 @@ engine=ps.init('sapi5')
 engine.setProperty('voice',engine.getProperty('voices')[1].id)
 
 def say(flow):
-    engine.say('Hello, I am John.')
-    engine.runAndWait()
+    # engine.say('Hello, I am John.')
+    # engine.save_to_file('Hello, I am John. Who are you.','test.mp3','hello')
+
+    text='Hello, I am John. Who are You'
+
+    obj=gTTS(text)
+    obj.save('test.mp3')
+    audio=open('test.mp3','rb').read()
+
+    st.audio(audio)
+    # engine.runAndWait()
